@@ -1,29 +1,29 @@
 <script>
-let input = ''
-let output = ''
+  let input = "";
+  let output = "";
 
-function encrypt() {
-    let plaintext = input
-    let ciphertext = ''
+  function encrypt() {
+    let plaintext = input;
+    let ciphertext = "";
 
-    for(let i = 0; i < plaintext.length; i++) {
-        ciphertext += plaintext.charCodeAt(i) + ' '
+    for (let i = 0; i < plaintext.length; i++) {
+      ciphertext += plaintext.charCodeAt(i) + " ";
     }
 
-    output = ciphertext
-}
+    output = ciphertext;
+  }
 </script>
 
+<section class="section content">
+  <h1>Cipher</h1>
 
-<h1>Cipher</h1>
+  <label style="width: 40%" class="label">
+    Text:
+    <input class="input" type="text" bind:value={input} />
+  </label>
 
-<label>
-Text
-<input type="text" bind:value={input}>
-</label>
+  <button class="button is-success" on:click={encrypt}>Encrypt</button>
 
-<button on:click={encrypt}>Encrypt</button>
-
-
-<h2>Result</h2>
-<p>{output}</p>
+  <h2>Result:</h2>
+  <p>{output}</p>
+</section>
