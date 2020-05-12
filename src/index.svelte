@@ -1,4 +1,6 @@
 <script>
+  const shift = 3
+
   let input = "";
   let output = "";
 
@@ -7,7 +9,10 @@
     let ciphertext = "";
 
     for (let i = 0; i < plaintext.length; i++) {
-      ciphertext += plaintext.charCodeAt(i) + "|";
+      //ciphertext += plaintext.charCodeAt(i) + "|";
+      let charCode = plaintext.charCodeAt(i)
+      charCode += shift
+      ciphertext += charCode + '|'
     }
 
     output = ciphertext;
@@ -22,6 +27,7 @@
       if(ciphertext[i] !== '|') {
         charCode += ciphertext[i]
       } else {
+        charCode -= shift
         plaintext += String.fromCharCode(charCode)
         charCode = ''
       }
