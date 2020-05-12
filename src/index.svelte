@@ -40,7 +40,7 @@
   </label>
 
   <button class="button is-success" on:click={encrypt}>Encrypt</button>
-  <button on:click={decrypt}>Decrypt</button>
+  <button class="button is-success" on:click={decrypt}>Decrypt</button>
 
   <h2>Result:</h2>
   <p>{output}</p>
