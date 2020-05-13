@@ -1,5 +1,5 @@
 <script>
-  const shift = 3
+  const shift = 3;
 
   let input = "";
   let output = "";
@@ -10,30 +10,64 @@
 
     for (let i = 0; i < plaintext.length; i++) {
       //ciphertext += plaintext.charCodeAt(i) + "|";
-      let charCode = plaintext.charCodeAt(i)
-      charCode += shift
-      ciphertext += charCode + '|'
+      let charCode = plaintext.charCodeAt(i);
+      charCode += shift;
+      ciphertext += charCode + "|";
     }
 
     output = ciphertext;
   }
 
   function decrypt() {
-    let ciphertext = input
-    let plaintext = ''
-    let charCode = ''
+    let ciphertext = input;
+    let plaintext = "";
+    let charCode = "";
 
-    for(let i = 0; i < ciphertext.length; i++) {
-      if(ciphertext[i] !== '|') {
-        charCode += ciphertext[i]
+    for (let i = 0; i < ciphertext.length; i++) {
+      if (ciphertext[i] !== "|") {
+        charCode += ciphertext[i];
       } else {
-        charCode -= shift
-        plaintext += String.fromCharCode(charCode)
-        charCode = ''
+        charCode -= shift;
+        plaintext += String.fromCharCode(charCode);
+        charCode = "";
       }
     }
-    
-    output = plaintext
+
+    output = plaintext;
+  }
+
+  function analyse() {
+    let ciphertext = input;
+    let charCode = "";
+    let codes = [];
+    let analysis = "";
+
+    for (let i = 0; i < ciphertext.length; i++) {
+      if (ciphertext[i] !== "|") {
+        charCode += ciphertext[i];
+      } else {
+        codes = [...codes, charCode];
+        charCode = "";
+      }
+    }
+    if (codes.length) {
+      codes.sort();
+      let currentCode = codes[0];
+      let count = 0;
+
+      for (let i = 0; i < codes.length; i++) {
+        if (codes[i] === currentCode) {
+          count += 1;
+        } else {
+          analysis += currentCode + " appears " + count + " times. <br>";
+          currentCode = codes[i];
+          count = 1;
+        }
+      }
+      analysis += currentCode + " appears " + count + " times. <br>";
+    }
+
+    output = analysis;
   }
 </script>
 
@@ -47,7 +81,8 @@
 
   <button class="button is-success" on:click={encrypt}>Encrypt</button>
   <button class="button is-success" on:click={decrypt}>Decrypt</button>
+  <button class="button is-danger" on:click={analyse}>Analyse</button>
 
   <h2>Result:</h2>
-  <p>{output}</p>
+  <p>{@html output}</p>
 </section>
